@@ -1,6 +1,6 @@
-package infotec.sgva.dto;
+package infotec.sgva.dto.rh;
 
-import infotec.sgva.entities.Departamento;
+import infotec.sgva.entities.rh.Departamento;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

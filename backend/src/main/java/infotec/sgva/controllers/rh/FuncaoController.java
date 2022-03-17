@@ -1,4 +1,4 @@
-package infotec.sgva.controllers;
+package infotec.sgva.controllers.rh;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -8,27 +8,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import infotec.sgva.dto.DepartamentoDTO;
-import infotec.sgva.services.DepartamentoService;
+import infotec.sgva.dto.rh.FuncaoDTO;
+import infotec.sgva.services.rh.FuncaoService;
 
 @RestController
-@RequestMapping(value = "/departamentos")
-public class DepartamentoController {
-	
+@RequestMapping(value = "/funcoes")
+public class FuncaoController {
+
 	@Autowired
-	private DepartamentoService service;
-	
+	private FuncaoService service;
+
 	@GetMapping
-	public Page<DepartamentoDTO> findAll(Pageable pegeable){
+	public Page<FuncaoDTO> findAll(Pageable pegeable) {
 		return service.findAll(pegeable);
 	}
-	
-	@GetMapping(value = "/{id}")
-	public DepartamentoDTO findById(@PathVariable Long id){
-		return service.findById(id);
-		
-		
-	}
 
+	@GetMapping(value = "/{id}")
+	public FuncaoDTO findById(@PathVariable Long id) {
+		return service.findById(id);
+
+	}
 
 }

@@ -1,4 +1,4 @@
-package infotec.sgva.services;
+package infotec.sgva.services.rh;
 
 import java.util.Optional;
 
@@ -8,9 +8,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import infotec.sgva.dto.FuncaoDTO;
-import infotec.sgva.entities.Funcao;
-import infotec.sgva.repository.FuncaoRepository;
+import infotec.sgva.dto.rh.FuncaoDTO;
+import infotec.sgva.entities.rh.Funcao;
+import infotec.sgva.repository.rh.FuncaoRepository;
 
 @Service
 public class FuncaoService {

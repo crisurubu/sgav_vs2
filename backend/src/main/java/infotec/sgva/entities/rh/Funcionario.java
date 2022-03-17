@@ -1,4 +1,4 @@
-package infotec.sgva.entities;
+package infotec.sgva.entities.rh;
 
 import java.util.Date;
 

@@ -1,6 +1,6 @@
-package infotec.sgva.dto;
+package infotec.sgva.dto.rh;
 
-import infotec.sgva.entities.Funcao;
+import infotec.sgva.entities.rh.Funcao;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

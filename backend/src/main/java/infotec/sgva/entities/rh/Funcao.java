@@ -1,4 +1,4 @@
-package infotec.sgva.entities;
+package infotec.sgva.entities.rh;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

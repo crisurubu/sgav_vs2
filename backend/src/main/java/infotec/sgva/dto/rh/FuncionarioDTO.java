@@ -1,8 +1,8 @@
-package infotec.sgva.dto;
+package infotec.sgva.dto.rh;
 
 import java.text.SimpleDateFormat;
 
-import infotec.sgva.entities.Funcionario;
+import infotec.sgva.entities.rh.Funcionario;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

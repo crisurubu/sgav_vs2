@@ -1,4 +1,4 @@
-package infotec.sgva.services;
+package infotec.sgva.services.rh;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -6,9 +6,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import infotec.sgva.dto.DepartamentoDTO;
-import infotec.sgva.entities.Departamento;
-import infotec.sgva.repository.DepartamentoRepository;
+import infotec.sgva.dto.rh.DepartamentoDTO;
+import infotec.sgva.entities.rh.Departamento;
+import infotec.sgva.repository.rh.DepartamentoRepository;
 
 @Service
 public class DepartamentoService {

@@ -1,10 +1,10 @@
-package infotec.sgva.repository;
+package infotec.sgva.repository.rh;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import infotec.sgva.entities.Funcionario;
+import infotec.sgva.entities.rh.Funcionario;
 
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Long>{
 	
