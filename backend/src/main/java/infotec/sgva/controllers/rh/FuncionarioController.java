@@ -46,10 +46,17 @@ public class FuncionarioController {
 		return service.findAll(pegeable);
 	}
 	
-	@GetMapping(value = "/{id}")
+	/*@GetMapping(value = "/{id}")
 	public FuncionarioDTO findById(@PathVariable Long id){
 		return service.findById(id);
 				
+	}*/
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<?> findById(@PathVariable("id") Long id){		
+		return service.obterPorId(id).map(funcionario -> new ResponseEntity<>(FuncionarioDTO.convert(funcionario), HttpStatus.OK))
+				 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+
+			
 	}
 	
 	@PostMapping

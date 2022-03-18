@@ -30,6 +30,8 @@ import infotec.sgva.services.login.SecurityUserDetailService;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
+	
+	
 	@Autowired
 	private SecurityUserDetailService userDetailsService;
 	@Autowired
@@ -56,11 +58,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	}
 	
 	
+	
 	protected void configure(HttpSecurity http) throws Exception{
 		http.csrf().disable().authorizeRequests().requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
 							 .antMatchers(HttpMethod.POST,"/usuarios").permitAll()
 							 .antMatchers(HttpMethod.POST,"/usuarios/autenticar").permitAll()
+							 .antMatchers(HttpMethod.POST,"/funcionarios").permitAll()
 							 .antMatchers(HttpMethod.GET,"/funcionarios").permitAll()
+							 .antMatchers(HttpMethod.GET,"/funcionarios/{id}").permitAll()
 							 .anyRequest()
 							 .authenticated()
 							 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
