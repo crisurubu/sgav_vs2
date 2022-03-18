@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import infotec.sgva.dto.login.TokenDTO;
 import infotec.sgva.dto.login.UsuarioDTO;
 import infotec.sgva.entities.login.Usuario;
 import infotec.sgva.enums.Permissoes;
 import infotec.sgva.exception.ErroAutenticacao;
 import infotec.sgva.exception.RegraNegocioException;
+import infotec.sgva.services.login.JwtService;
 import infotec.sgva.services.login.UsuarioService;
 import lombok.RequiredArgsConstructor;
 
@@ -23,13 +25,18 @@ public class UsuarioController {
 
 	@Autowired
 	private final UsuarioService service;
+	
+	@Autowired
+	private JwtService jwtService;
 
 	@PostMapping("/autenticar")
 	public ResponseEntity<?> autenticar(@RequestBody UsuarioDTO dto) {
 
 		try {
 			Usuario usuarioAutenticado = service.autenticar(dto.getEmail(), dto.getSenha());
-			return ResponseEntity.ok(usuarioAutenticado);
+			String token = jwtService.gerarToken(usuarioAutenticado);
+			TokenDTO tokenDTO = new TokenDTO(usuarioAutenticado.getNome(), token);
+			return ResponseEntity.ok(tokenDTO);
 
 		} catch (ErroAutenticacao e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
