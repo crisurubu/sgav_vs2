@@ -22,6 +22,7 @@ public class Veiculo {
 	private String chassi;
 	private String marca;
 	
+		
 	@Enumerated(value = EnumType.STRING)
 	private VeiculoStatus status;
 	

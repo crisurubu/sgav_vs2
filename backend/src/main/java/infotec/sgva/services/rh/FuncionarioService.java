@@ -125,6 +125,12 @@ public class FuncionarioService {
 		return repository.findByCpf(cpf);
 	}
 	
+	public Optional<Funcionario> obterPorEmail(String email) {
+		return repository.findByEmail(email);
+	}
+	
+	
+	
 	
 	
 	

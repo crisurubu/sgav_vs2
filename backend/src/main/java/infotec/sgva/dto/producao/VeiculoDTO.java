@@ -15,6 +15,7 @@ public class VeiculoDTO {
 	
 	public static VeiculoDTO converter(Veiculo veiculo) {
 		VeiculoDTO veiculoDTO = new VeiculoDTO();
+		veiculoDTO.setId(veiculo.getId());
 		veiculoDTO.setChassi(veiculo.getChassi());
 		veiculoDTO.setMarca(veiculo.getMarca());
 		veiculoDTO.setStatus(veiculo.getStatus().name());

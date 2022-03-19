@@ -8,9 +8,10 @@ import infotec.sgva.entities.rh.Funcionario;
 
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Long>{
 	
-	Funcionario findByEmail(String email);
+	Optional<Funcionario> findByEmail(String email);
 	boolean existsByCpf(String cpf);
 	Optional<Funcionario> findByCpf(String cpf);
+	
 	
 
 }
