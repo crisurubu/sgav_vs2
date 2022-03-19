@@ -14,23 +14,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import infotec.sgva.dto.producao.VeiculoDateEntradaDTO;
+import infotec.sgva.dto.producao.VeiculoDateSaidaDTO;
 import infotec.sgva.entities.producao.Veiculo;
-import infotec.sgva.entities.producao.VeiculoDateEntrada;
+import infotec.sgva.entities.producao.VeiculoDateSaida;
 import infotec.sgva.entities.rh.Funcionario;
 import infotec.sgva.exception.RegraNegocioException;
-import infotec.sgva.services.producao.VeiculoDateEntradaService;
+import infotec.sgva.services.producao.VeiculoDateSaidaService;
 import infotec.sgva.services.producao.VeiculoService;
 import infotec.sgva.services.rh.FuncionarioService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/veiculos/entrada")
-public class VeiculoDateEntradaController {
+@RequestMapping(value = "/veiculos/saida")
+public class VeiculoDateSaidaController {
 	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 	@Autowired
-	private VeiculoDateEntradaService service;
+	private VeiculoDateSaidaService service;
 	
 	@Autowired
 	private VeiculoService VeiculoService;
@@ -40,15 +40,15 @@ public class VeiculoDateEntradaController {
 	
 	
 	@GetMapping
-	public Page<VeiculoDateEntradaDTO> findAll(Pageable pegeable){
+	public Page<VeiculoDateSaidaDTO> findAll(Pageable pegeable){
 		return service.findAll(pegeable);
 	}
 	
 		
 	@PutMapping
-	public ResponseEntity<?> save(@RequestBody VeiculoDateEntradaDTO dto) throws ParseException {
+	public ResponseEntity<?> save(@RequestBody VeiculoDateSaidaDTO dto) throws ParseException {
 		try {
-			VeiculoDateEntrada entidade = converter(dto);
+			VeiculoDateSaida entidade = converter(dto);
 			entidade = service.save(entidade);
 			return new ResponseEntity<>(entidade, HttpStatus.CREATED);
 			
@@ -61,19 +61,19 @@ public class VeiculoDateEntradaController {
 	
 	
 	
-	private VeiculoDateEntrada converter(VeiculoDateEntradaDTO dto) throws ParseException {
-		VeiculoDateEntrada veiculoDateEntrada = new VeiculoDateEntrada();
+	private VeiculoDateSaida converter(VeiculoDateSaidaDTO dto) throws ParseException {
+		VeiculoDateSaida VeiculoDateSaida = new VeiculoDateSaida();
 		
 		Veiculo veiculo = VeiculoService.findByChassi(dto.getChassi())
 				.orElseThrow(() -> new RegraNegocioException("Veículo não encontrado.."));
-		veiculoDateEntrada.setVeiculo(veiculo);
+		VeiculoDateSaida.setVeiculo(veiculo);
 		
 		Funcionario funcionario = funcionarioService.obterPorEmail(dto.getEmail())
 				.orElseThrow(() -> new RegraNegocioException("Funcionário não encontrado.."));
-		veiculoDateEntrada.setFuncionario(funcionario);
+		VeiculoDateSaida.setFuncionario(funcionario);
 		
-		veiculoDateEntrada.setDataEntrada(sdf.parse(dto.getDataEntrada()));
-		return veiculoDateEntrada;
+		VeiculoDateSaida.setDataEntrada(sdf.parse(dto.getDataEntrada()));
+		return VeiculoDateSaida;
 		
 		
 	}
