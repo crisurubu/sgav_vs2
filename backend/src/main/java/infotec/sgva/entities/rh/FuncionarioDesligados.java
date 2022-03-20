@@ -14,37 +14,30 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import infotec.sgva.enums.FuncionarioStatus;
+import infotec.sgva.enums.MotivoDesligamento;
 import lombok.Data;
 
 @Entity
-@Table(name = "tb_funcionario", schema = "rh")
+@Table(name = "tb_funcionariosDesligados", schema = "rh")
 @Data
-public class Funcionario {
+public class FuncionarioDesligados {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String nome;
-	private String cpf;
-	private String email;
-	private String celular;
-	
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'z'", timezone = "GMT")
-	private Date dataAdmissao;
+	private Date dataDemissao;
+	
+	private String descricao;
 	
 	@Enumerated(value = EnumType.STRING)
-	private FuncionarioStatus status;
+	private MotivoDesligamento desligamento;
 	
 	@OneToOne
-	@JoinColumn(name = "id_funcao")	
-	private Funcao funcao;
+	@JoinColumn(name = "id_funcionario")
+	private Funcionario funcionario;
 	
-	
-	
-	
-
 	
 
 }

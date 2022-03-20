@@ -67,7 +67,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 							 .antMatchers(HttpMethod.GET,"/funcionarios").permitAll()
 							 .antMatchers(HttpMethod.GET,"/funcionarios/{id}").permitAll()
 							 .antMatchers(HttpMethod.PUT,"/funcionarios/{id}").permitAll()
-							 .antMatchers(HttpMethod.PUT,"/funcionarios/{id}/demitir").permitAll()
+							 .antMatchers(HttpMethod.PUT,"/funcionarios/demitir").permitAll()
 							 .antMatchers(HttpMethod.DELETE,"/funcionarios/{id}").permitAll()
 							 .antMatchers(HttpMethod.GET,"/funcoes").permitAll()
 							 .antMatchers(HttpMethod.GET,"/funcoes/{id}").permitAll()

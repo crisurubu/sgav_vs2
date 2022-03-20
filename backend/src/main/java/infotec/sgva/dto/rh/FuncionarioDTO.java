@@ -19,7 +19,6 @@ public class FuncionarioDTO {
 	private String email;
 	private String celular;
 	private String dataAdmissao;
-	private String dataDemissao;
 	private FuncaoDTO funcao;
 	private String status;
 	
@@ -32,8 +31,7 @@ public class FuncionarioDTO {
 		funcionarioDTO.setEmail(funcionario.getEmail());
 		funcionarioDTO.setCelular(funcionario.getCelular());
 		funcionarioDTO.setDataAdmissao(sdf.format(funcionario.getDataAdmissao()));
-		funcionarioDTO.setDataDemissao(sdf.format(funcionario.getDataDemissao()));
-		
+				
 		if(funcionario.getFuncao() != null) {
 			funcionarioDTO.setFuncao(FuncaoDTO.convert(funcionario.getFuncao()));
 		}

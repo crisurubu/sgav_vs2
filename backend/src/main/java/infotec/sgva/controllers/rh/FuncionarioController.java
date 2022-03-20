@@ -2,7 +2,6 @@ package infotec.sgva.controllers.rh;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -92,29 +91,6 @@ public class FuncionarioController {
 		}).orElseGet(() -> new ResponseEntity<>("Funcionário não encontrado.", HttpStatus.BAD_REQUEST));
 	}
 	
-	@PutMapping(value = "/{id}/demitir")
-	public ResponseEntity<?> demitir(@PathVariable("id") Long id){
-		return service.obterPorId(id).map(entity ->{
-			FuncionarioStatus statusFuncionario = FuncionarioStatus.INATIVO;
-			if(statusFuncionario == null) {
-				return ResponseEntity.badRequest().body("Não foi possível atualizar status do funcionário..");
-			}
-			try 
-				{
-					
-					entity.setDataDemissao(new Date());
-					entity.setStatus(statusFuncionario);
-					service.atualizar(entity);
-					return ResponseEntity.ok(entity);
-					
-					
-				} 
-			catch (RegraNegocioException e) {
-				return ResponseEntity.badRequest().body(e.getMessage());
-			}		
-
-		}).orElseGet(() -> new ResponseEntity<>("Funcionário não encontrado.", HttpStatus.BAD_REQUEST));
-	}
 	
 	
 	@DeleteMapping("{id}")
@@ -134,7 +110,7 @@ public class FuncionarioController {
 		funcionario.setCpf(dto.getCpf());
 		funcionario.setCelular(dto.getCelular());
 		funcionario.setDataAdmissao(sdf.parse(dto.getDataAdmissao()));
-		funcionario.setDataDemissao(sdf.parse(dto.getDataDemissao()));
+		
 		
 		Funcao funcao = funcaoService.obterPorId(dto.getFuncao().getId())
 				.orElseThrow(() -> new RegraNegocioException("Função não encontrada para Id Informado"));

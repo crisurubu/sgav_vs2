@@ -52,14 +52,6 @@ public class FuncionarioService {
 	}
 	
 	@Transactional
-	public Funcionario demitir(Funcionario funcionario) {
-		Objects.requireNonNull(funcionario.getId());
-		validar(funcionario);
-		funcionario.setStatus(FuncionarioStatus.INATIVO);
-		return funcionario;
-	}
-	
-	@Transactional
 	public Funcionario ferias(Funcionario funcionario) {
 		Objects.requireNonNull(funcionario.getId());
 		validar(funcionario);
