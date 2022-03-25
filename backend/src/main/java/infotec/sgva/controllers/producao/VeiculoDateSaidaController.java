@@ -30,6 +30,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping(value = "/veiculos/saida")
 public class VeiculoDateSaidaController {
 	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+	
 	@Autowired
 	private VeiculoDateSaidaService service;
 	
@@ -59,9 +60,7 @@ public class VeiculoDateSaidaController {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 	}
-	
-	
-	
+		
 	private VeiculoDateSaida converter(VeiculoDateSaidaDTO dto) throws ParseException {
 		VeiculoDateSaida VeiculoDateSaida = new VeiculoDateSaida();
 		
