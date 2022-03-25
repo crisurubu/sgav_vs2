@@ -1,5 +1,6 @@
 package infotec.sgva.services.producao;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,14 @@ public class VeiculoService {
 		validar(Veiculo);
 		Veiculo.setStatus(VeiculoStatus.PATIO);
 		return repository.save(Veiculo);		
+		
+	}
+	
+	@Transactional
+	public Veiculo atualizar(Veiculo veiculo) {
+		Objects.requireNonNull(veiculo.getId());
+		validar(veiculo);
+		return repository.saveAndFlush(veiculo);		
 		
 	}
 	

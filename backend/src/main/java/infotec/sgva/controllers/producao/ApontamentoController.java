@@ -19,6 +19,7 @@ import infotec.sgva.dto.producao.ApontamentoDTO;
 import infotec.sgva.entities.producao.Apontamento;
 import infotec.sgva.entities.producao.Veiculo;
 import infotec.sgva.enums.ApontamentosStatus;
+import infotec.sgva.enums.VeiculoStatus;
 import infotec.sgva.exception.RegraNegocioException;
 import infotec.sgva.services.producao.ApontamentoService;
 import infotec.sgva.services.producao.VeiculoService;
@@ -30,7 +31,7 @@ import lombok.RequiredArgsConstructor;
 public class ApontamentoController {
 	
 	@Autowired
-	private VeiculoService VeiculoService;	
+	private VeiculoService veiculoService;	
 	
 	@Autowired
 	private ApontamentoService service;
@@ -79,8 +80,10 @@ public class ApontamentoController {
 		
 		apontamentos.setApontamento(dto.getApontamento());
 		
-		Veiculo veiculo = VeiculoService.findByChassi(dto.getChassi())
+		Veiculo veiculo = veiculoService.findByChassi(dto.getChassi())
 				.orElseThrow(() -> new RegraNegocioException("Veículo não encontrado.."));
+		veiculo.setStatus(VeiculoStatus.LCQ);
+		veiculoService.atualizar(veiculo);
 		apontamentos.setVeiculo(veiculo);
 		
 		if(dto.getStatus() != null) {

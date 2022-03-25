@@ -18,6 +18,7 @@ import infotec.sgva.dto.producao.VeiculoDateEntradaDTO;
 import infotec.sgva.entities.producao.Veiculo;
 import infotec.sgva.entities.producao.VeiculoDateEntrada;
 import infotec.sgva.entities.rh.Funcionario;
+import infotec.sgva.enums.VeiculoStatus;
 import infotec.sgva.exception.RegraNegocioException;
 import infotec.sgva.services.producao.VeiculoDateEntradaService;
 import infotec.sgva.services.producao.VeiculoService;
@@ -28,12 +29,14 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping(value = "/veiculos/entrada")
 public class VeiculoDateEntradaController {
+	
 	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+	
 	@Autowired
 	private VeiculoDateEntradaService service;
 	
 	@Autowired
-	private VeiculoService VeiculoService;
+	private VeiculoService veiculoService;
 	
 	@Autowired
 	private FuncionarioService funcionarioService;
@@ -64,9 +67,12 @@ public class VeiculoDateEntradaController {
 	private VeiculoDateEntrada converter(VeiculoDateEntradaDTO dto) throws ParseException {
 		VeiculoDateEntrada veiculoDateEntrada = new VeiculoDateEntrada();
 		
-		Veiculo veiculo = VeiculoService.findByChassi(dto.getChassi())
+		Veiculo veiculo = veiculoService.findByChassi(dto.getChassi())
 				.orElseThrow(() -> new RegraNegocioException("Veículo não encontrado.."));
+		veiculo.setStatus(VeiculoStatus.EMPRODUÇÃO);
+		veiculoService.atualizar(veiculo);		
 		veiculoDateEntrada.setVeiculo(veiculo);
+		
 		
 		Funcionario funcionario = funcionarioService.obterPorEmail(dto.getEmail())
 				.orElseThrow(() -> new RegraNegocioException("Funcionário não encontrado.."));

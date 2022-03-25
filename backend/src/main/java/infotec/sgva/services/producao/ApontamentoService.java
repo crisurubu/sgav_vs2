@@ -47,6 +47,8 @@ public class ApontamentoService {
 		return repository.save(apontamento);
 	}
 	
+
+	
 	@Transactional
 	public Apontamento fecharApontamento(Apontamento apontamento) {
 		validar(apontamento);	

@@ -18,6 +18,7 @@ import infotec.sgva.dto.producao.VeiculoDateSaidaDTO;
 import infotec.sgva.entities.producao.Veiculo;
 import infotec.sgva.entities.producao.VeiculoDateSaida;
 import infotec.sgva.entities.rh.Funcionario;
+import infotec.sgva.enums.VeiculoStatus;
 import infotec.sgva.exception.RegraNegocioException;
 import infotec.sgva.services.producao.VeiculoDateSaidaService;
 import infotec.sgva.services.producao.VeiculoService;
@@ -33,7 +34,7 @@ public class VeiculoDateSaidaController {
 	private VeiculoDateSaidaService service;
 	
 	@Autowired
-	private VeiculoService VeiculoService;
+	private VeiculoService veiculoService;
 	
 	@Autowired
 	private FuncionarioService funcionarioService;
@@ -64,8 +65,10 @@ public class VeiculoDateSaidaController {
 	private VeiculoDateSaida converter(VeiculoDateSaidaDTO dto) throws ParseException {
 		VeiculoDateSaida VeiculoDateSaida = new VeiculoDateSaida();
 		
-		Veiculo veiculo = VeiculoService.findByChassi(dto.getChassi())
+		Veiculo veiculo = veiculoService.findByChassi(dto.getChassi())
 				.orElseThrow(() -> new RegraNegocioException("Veículo não encontrado.."));
+		veiculo.setStatus(VeiculoStatus.FINALIZADO);
+		veiculoService.atualizar(veiculo);
 		VeiculoDateSaida.setVeiculo(veiculo);
 		
 		Funcionario funcionario = funcionarioService.obterPorEmail(dto.getEmail())
