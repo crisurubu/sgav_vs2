@@ -16,7 +16,7 @@ public class FuncionarioFeriasService {
 	
 	
 	@Transactional
-	public FuncionarioFerias salvar(FuncionarioFerias funcionarioFerias) {
+	public FuncionarioFerias ferias(FuncionarioFerias funcionarioFerias) {
 		validar(funcionarioFerias);					
 		return repository.save(funcionarioFerias);		
 		

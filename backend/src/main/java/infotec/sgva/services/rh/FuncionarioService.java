@@ -55,7 +55,6 @@ public class FuncionarioService {
 	public Funcionario ferias(Funcionario funcionario) {
 		Objects.requireNonNull(funcionario.getId());
 		validar(funcionario);
-		funcionario.setStatus(FuncionarioStatus.FERIAS);
 		return funcionario;
 	}
 	
@@ -63,7 +62,6 @@ public class FuncionarioService {
 	public Funcionario afastar(Funcionario funcionario) {
 		Objects.requireNonNull(funcionario.getId());
 		validar(funcionario);
-		funcionario.setStatus(FuncionarioStatus.AFASTADO);
 		return funcionario;
 	}
 	
