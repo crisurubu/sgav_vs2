@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import infotec.sgva.entities.producao.Apontamento;
 import infotec.sgva.entities.producao.Veiculo;
+import infotec.sgva.enums.ApontamentosStatus;
 import infotec.sgva.exception.RegraNegocioException;
 import infotec.sgva.repository.producao.ApontamentoRepository;
 import infotec.sgva.repository.producao.VeiculoRepository;
@@ -46,6 +47,18 @@ public class ApontamentoService {
 		return repository.save(apontamento);
 	}
 	
+	@Transactional
+	public Apontamento fecharApontamento(Apontamento apontamento) {
+		validar(apontamento);	
+		apontamento.setStatus(ApontamentosStatus.FECHADO);
+		return repository.saveAndFlush(apontamento);
+	}
+	
+	@Transactional(readOnly = true)
+	public Optional<Apontamento> obterPorId(Long id){
+		return repository.findById(id);
+	}
+	
 	
 	
 	public void validar(Apontamento apontamento) {
@@ -60,6 +73,8 @@ public class ApontamentoService {
 		}
 			
 	}
+	
+	
 	
 
 }

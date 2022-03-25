@@ -25,7 +25,6 @@ import infotec.sgva.services.login.JwtService;
 import infotec.sgva.services.login.SecurityUserDetailService;
 
 
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -76,13 +75,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 							 .antMatchers(HttpMethod.PUT,"/veiculos/entrada").permitAll()
 							 .antMatchers(HttpMethod.GET,"/veiculos/entrada").permitAll()
 							 .antMatchers(HttpMethod.PUT,"/veiculos/saida").permitAll()
-							 .antMatchers(HttpMethod.GET,"/veiculos/saida").permitAll()
-							 .antMatchers(HttpMethod.POST,"/apontamentos").permitAll()
-							 .antMatchers(HttpMethod.POST,"/veiculoapontamentos").permitAll()
-							 .antMatchers(HttpMethod.GET,"/veiculoapontamentos").permitAll()
-							 .antMatchers(HttpMethod.GET,"/apontamentos/{chassi}").permitAll()
+							 .antMatchers(HttpMethod.GET,"/veiculos/saida").permitAll()							 
 							 .antMatchers(HttpMethod.GET,"/apontamento/{chassi}").permitAll()
 							 .antMatchers(HttpMethod.POST,"/apontamento").permitAll()
+							 .antMatchers(HttpMethod.PUT,"/apontamento/{id}/fechar").permitAll()
 							 .anyRequest()
 							 .authenticated()
 							 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

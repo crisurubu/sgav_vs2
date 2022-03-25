@@ -18,11 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import infotec.sgva.dto.producao.ApontamentosDTO;
 import infotec.sgva.entities.producao.Apontamentos;
 import infotec.sgva.entities.producao.Veiculo;
-import infotec.sgva.entities.producao.VeiculoApontamentos;
 import infotec.sgva.enums.ApontamentosStatus;
 import infotec.sgva.exception.RegraNegocioException;
 import infotec.sgva.services.producao.ApontamentosService;
-import infotec.sgva.services.producao.VeiculoApontamentosService;
 import infotec.sgva.services.producao.VeiculoService;
 import lombok.RequiredArgsConstructor;
 
@@ -34,8 +32,7 @@ public class ApontamentosController {
 	@Autowired
 	private VeiculoService VeiculoService;
 	
-	@Autowired
-	private VeiculoApontamentosService VeiculoApontamentosService;
+	
 	
 	@Autowired
 	private ApontamentosService service;
@@ -81,17 +78,6 @@ public class ApontamentosController {
 		
 		Set<Apontamentos> lista = new HashSet<>();
 		lista.add(apontamentos);
-		
-		
-		VeiculoApontamentos veiculoApontamentos = new VeiculoApontamentos();
-		for(Apontamentos a : lista) {
-			veiculoApontamentos.setApontamentos(lista);
-			a.getApontamento();
-		}
-		
-		VeiculoApontamentosService.salvar(veiculoApontamentos);
-		
-		
 		
 		return apontamentos;	
 		
