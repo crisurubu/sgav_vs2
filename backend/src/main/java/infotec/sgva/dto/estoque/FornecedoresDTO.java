@@ -25,5 +25,16 @@ public class FornecedoresDTO {
 		
 	}
 	
+	public static FornecedoresDTO convert(Fornecedores fornecedor) {
+		FornecedoresDTO dto = new FornecedoresDTO();
+		dto.setId(fornecedor.getId());
+		dto.setNome(fornecedor.getNome());
+		dto.setCnpj(fornecedor.getCnpj());
+		dto.setEmail(fornecedor.getEmail());
+		dto.setFone(fornecedor.getFone());
+		return dto;
+		
+	}
+	
 
 }
