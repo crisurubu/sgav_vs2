@@ -80,6 +80,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 							 .antMatchers(HttpMethod.GET,"/apontamento/{chassi}").permitAll()
 							 .antMatchers(HttpMethod.POST,"/apontamento").permitAll()
 							 .antMatchers(HttpMethod.PUT,"/apontamento/{id}/fechar").permitAll()
+							 .antMatchers(HttpMethod.GET,"/produtos").permitAll()
 							 .anyRequest()
 							 .authenticated()
 							 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
