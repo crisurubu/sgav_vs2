@@ -8,7 +8,9 @@ import infotec.sgva.entities.estoque.Fornecedores;
 
 public interface FornecedoresRepository extends JpaRepository<Fornecedores, Long> {
 	
-	Optional<Fornecedores> findByCnpj(String cnpj);
+	Optional<Fornecedores> findByNome(String nome);
 	boolean existsByCnpj(String cnpj);
+	
+	
 
 }

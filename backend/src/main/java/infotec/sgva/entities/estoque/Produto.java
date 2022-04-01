@@ -1,8 +1,6 @@
 package infotec.sgva.entities.estoque;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,8 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -40,10 +37,15 @@ public class Produto {
 	@Enumerated(value = EnumType.STRING)
 	private ProdutoStatus status;
 	
-	@ManyToMany
+	@OneToOne
+	@JoinColumn(name = "fornecedores_id")
+	private Fornecedores fornecedor;
+	
+	
+	/*@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "tb_produtos_fornecedores", schema = "estoque" , joinColumns = @JoinColumn(name = "produtos_id"),
 										 inverseJoinColumns = @JoinColumn(name = "fornecedores_id"))								
-	Set<Fornecedores> fornecedores = new HashSet<>();
+	Set<Fornecedores> fornecedores = new HashSet<>();*/
 	
 	public Produto() {
 		
@@ -51,7 +53,7 @@ public class Produto {
 	
 	
 	public Produto(Long id, String codigo, String descricao, Integer qnt, Date dataEntrada, CategoriaProduto categoria,
-			ProdutoStatus status, Set<Fornecedores> fornecedores) {
+			ProdutoStatus status, Fornecedores fornecedor) {
 		super();
 		this.id = id;
 		this.codigo = codigo;
@@ -60,7 +62,8 @@ public class Produto {
 		this.dataEntrada = dataEntrada;
 		this.categoria = categoria;
 		this.status = status;
-		this.fornecedores = fornecedores;
+		this.fornecedor = fornecedor;
+		
 	}
 
 
@@ -134,10 +137,16 @@ public class Produto {
 	}
 
 
-	public Set<Fornecedores> getFornecedores() {
-		return fornecedores;
+	public Fornecedores getFornecedor() {
+		return fornecedor;
 	}
-	
+
+
+	public void setFornecedor(Fornecedores fornecedor) {
+		this.fornecedor = fornecedor;
+	}
+
+
 	
 	
 

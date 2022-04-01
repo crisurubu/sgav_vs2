@@ -1,6 +1,7 @@
 package infotec.sgva.services.estoque;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,9 +21,21 @@ public class FornecedoresService {
 	private FornecedoresRepository repository;
 	
 	@Transactional(readOnly = true)
-	public FornecedoresDTO findByCnpj(String cnpj) {
-		Fornecedores buscaFornecedor = repository.findByCnpj(cnpj).get();
+	public FornecedoresDTO findByNome(String nome) {
+		Fornecedores buscaFornecedor = repository.findByNome(nome).get();
 		FornecedoresDTO dto = FornecedoresDTO.convert(buscaFornecedor);
+		return dto;
+		
+	}
+	
+	@Transactional(readOnly = true)
+	public FornecedoresDTO findById(Long id) {
+		Optional<Fornecedores> busca = repository.findById(id);
+		if(busca.isEmpty()) {
+			throw new RegraNegocioException("Não foi encontrado Fornecedor pelo id informado");
+		}
+		Fornecedores newFornecedor = busca.get();
+		FornecedoresDTO dto = FornecedoresDTO.convert(newFornecedor);
 		return dto;
 		
 	}
@@ -33,6 +46,11 @@ public class FornecedoresService {
 		Page<FornecedoresDTO> page = result.map(x -> FornecedoresDTO.convert(x));		
 		return page;
 		
+	}
+	
+	@Transactional
+	public Optional<Fornecedores> buscaPorId(Long id){
+		return repository.findById(id);
 	}
 	
 	

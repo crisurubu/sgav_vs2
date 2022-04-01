@@ -1,9 +1,6 @@
 package infotec.sgva.dto.estoque;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import infotec.sgva.entities.estoque.Produto;
 import lombok.NoArgsConstructor;
@@ -20,11 +17,13 @@ public class ProdutoDTO {
 	private String dataEntrada;
 	private String categoria;
 	private String status;
+	private FornecedoresDTO fornecedor;
 	
-	private List<FornecedoresDTO> fornecedores = new ArrayList<>();
+	
+	//private List<FornecedoresDTO> fornecedores = new ArrayList<>();
 
 	public ProdutoDTO(Long id, String codigo, String descricao, Integer qnt, String dataEntrada, String categoria,
-			String status, List<FornecedoresDTO> fornecedores) {
+		String status, FornecedoresDTO fornecedor) {
 		super();
 		this.id = id;
 		this.codigo = codigo;
@@ -33,7 +32,8 @@ public class ProdutoDTO {
 		this.dataEntrada = dataEntrada;
 		this.categoria = categoria;
 		this.status = status;
-		this.fornecedores = fornecedores;
+		this.fornecedor = fornecedor;
+		
 	}
 	
 	public ProdutoDTO(Produto produto) {
@@ -44,9 +44,34 @@ public class ProdutoDTO {
 		dataEntrada = sdf.format(produto.getDataEntrada());
 		categoria = produto.getCategoria().name();
 		status = produto.getStatus().name();
-		fornecedores = produto.getFornecedores().stream().map(x -> new FornecedoresDTO(x)).collect(Collectors.toList());
+		
+		if(produto.getFornecedor() != null) {
+			fornecedor = FornecedoresDTO.convert(produto.getFornecedor());		
+		}
+		
+		
+		//fornecedores = produto.getFornecedores().stream().map(x -> new FornecedoresDTO(x)).collect(Collectors.toList());
 		
 	}
+	
+	public static ProdutoDTO convert(Produto produto) {
+		ProdutoDTO newProduto = new ProdutoDTO();
+		newProduto.setId(produto.getId());	
+		newProduto.setCodigo(produto.getCodigo());
+		newProduto.setDescricao(produto.getDescricao());
+		newProduto.setQnt(produto.getQnt());		
+		newProduto.setCategoria(produto.getCategoria().name());
+		newProduto.setStatus(produto.getStatus().name());
+		
+		if(produto.getFornecedor() != null) {
+			newProduto.setFornecedor(FornecedoresDTO.convert(produto.getFornecedor()));
+			
+		}
+		return newProduto;
+		
+		
+	}
+	
 	
 
 	public Long getId() {
@@ -105,9 +130,18 @@ public class ProdutoDTO {
 		this.status = status;
 	}
 
-	public List<FornecedoresDTO> getFornecedores() {
-		return fornecedores;
+	
+	public FornecedoresDTO getFornecedor() {
+		return fornecedor;
 	}
+
+	public void setFornecedor(FornecedoresDTO fornecedor) {
+		this.fornecedor = fornecedor;
+	}
+
+	
+
+	
 	
 	
 	

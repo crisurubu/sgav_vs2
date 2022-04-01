@@ -1,9 +1,8 @@
-import Navbar from "./components/Navbar";
-
 
 function App() {
+
   return (
-    <Navbar />
+   <h1>Sistema de gestão de veiculos adptados</h1>
   );
 }
 
